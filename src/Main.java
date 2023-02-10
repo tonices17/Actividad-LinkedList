@@ -2,6 +2,7 @@ import javax.sound.midi.Soundbank;
 import java.util.*;
 
 public class Main {
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static void imprimirListarep(LinkedList<Cancion> playlist) {
