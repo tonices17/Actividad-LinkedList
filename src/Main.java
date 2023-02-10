@@ -119,7 +119,7 @@ public class Main {
                             System.out.println("Eliminando....");
                         } else {
                             it.next();
-                            System.out.println("Está sonando: " + it.previous().getTitulo());
+                            System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo());
                             System.out.println("Eliminando....");
                         }
                         try{
