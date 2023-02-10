@@ -53,34 +53,42 @@ public class Main {
                     continuar = false;
                     break;
                 case "1":
-                    if (!haciaAdelante) {
-                        if (it.hasNext()) {
-                            it.next();
-                            haciaAdelante = true;
+                    try{
+                        if (!haciaAdelante) {
+                            if (it.hasNext()) {
+                                it.next();
+                                haciaAdelante = true;
+                            }
                         }
-                    }
-                    if (it.hasNext()) {
-                        System.out.println("Reproduciendo siguiente canción -> " + it.next().getTitulo()+"\n");
-                    } else {
-                        System.out.println("Estás en el final de la playlist, ya no hay más canciones.");
-                        System.out.println("Ahora está sonando -> " + playlist.getLast().getTitulo()+"\n");
-                        haciaAdelante = false;
-                        it.previous();
+                        if (it.hasNext()) {
+                            System.out.println("Reproduciendo siguiente canción -> " + it.next().getTitulo()+"\n");
+                        } else {
+                            System.out.println("Estás en el final de la playlist, ya no hay más canciones.");
+                            System.out.println("Ahora está sonando -> " + playlist.getLast().getTitulo()+"\n");
+                            haciaAdelante = false;
+                            it.previous();
+                        }
+                    } catch (NoSuchElementException e) {
+                        System.out.println("La playlist está vacía. Todas las canciones han sido borradas." + "\n");
                     }
                     break;
                 case "2":
-                    if(haciaAdelante){
+                    try{
+                        if(haciaAdelante){
+                            if(it.hasPrevious()){
+                                it.previous();
+                                haciaAdelante = false;
+                            }
+                        }
                         if(it.hasPrevious()){
-                            it.previous();
+                            System.out.println("Reproduciendo la canción anterior -> " + it.previous().getTitulo()+"\n");
+                        } else {
+                            System.out.println("Estás en el principio de la playlist, ya no hay más canciones.");
+                            System.out.println("Ahora está sonando -> " + playlist.getFirst().getTitulo()+"\n");
                             haciaAdelante = false;
                         }
-                    }
-                    if(it.hasPrevious()){
-                        System.out.println("Reproduciendo la canción anterior -> " + it.previous().getTitulo()+"\n");
-                    } else {
-                        System.out.println("Estás en el principio de la playlist, ya no hay más canciones.");
-                        System.out.println("Ahora está sonando -> " + playlist.getFirst().getTitulo()+"\n");
-                        haciaAdelante = false;
+                    } catch (NoSuchElementException e){
+                        System.out.println("La playlist está vacía. Todas las canciones han sido borradas." + "\n");
                     }
                     break;
                 case "3":
