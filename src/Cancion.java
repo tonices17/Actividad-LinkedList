@@ -13,6 +13,6 @@ public class Cancion {
 
     @Override
     public String toString() {
-        return titulo+": "+duracion+" minutos.";
+        return titulo+": "+duracion+" minutos. ";
     }
 }

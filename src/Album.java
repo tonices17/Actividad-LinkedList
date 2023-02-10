@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Album {
     private String nombre, artista;
-    private static ArrayList<Cancion> canciones;
+    private ArrayList<Cancion> canciones;
     private static boolean devolver;
 
     public Album(String nombre, String artista) {
@@ -13,7 +13,7 @@ public class Album {
         canciones = new ArrayList<>();
     }
 
-    private static Cancion findSong(String titulo) {
+    private Cancion findSong(String titulo) {
         for (int i = 0; i < canciones.size(); i++) {
             if (canciones.get(i).getTitulo().equalsIgnoreCase(titulo)) {
                 return canciones.get(i);

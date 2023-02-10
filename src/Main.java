@@ -156,9 +156,9 @@ public class Main {
         LinkedList<Cancion> playlist = new LinkedList<>();
         album1.addToPlayList(0, playlist);
         album1.addToPlayList("Titi me Pregunto", playlist);
-        album2.addToPlayList(4, playlist);
+        album2.addToPlayList(1, playlist);
         album2.addToPlayList("Baby Queen", playlist);
-        album3.addToPlayList(7, playlist);
+        album3.addToPlayList(2, playlist);
         album3.addToPlayList("Shadows Follow", playlist);
 
         play(playlist);
