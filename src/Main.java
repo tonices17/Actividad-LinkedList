@@ -35,8 +35,8 @@ public class Main {
         ListIterator<Cancion> it = playlist.listIterator();
 
         System.out.println("*** Vamos a reproducir la playlist \"TEMAZOS\" ***");
-        System.out.println("\nEmpieza sonando -> "+playlist.getFirst().getTitulo()+"\n");
-        it.next();
+        //System.out.println("\nEmpieza sonando -> " + playlist.getFirst().getTitulo() + "\n");
+        //it.next();
         while (continuar) {
             do {
                 valido = true;
@@ -54,7 +54,7 @@ public class Main {
                     continuar = false;
                     break;
                 case "1":
-                    try{
+                    try {
                         if (!haciaAdelante) {
                             if (it.hasNext()) {
                                 it.next();
@@ -62,10 +62,10 @@ public class Main {
                             }
                         }
                         if (it.hasNext()) {
-                            System.out.println("Reproduciendo siguiente canción -> " + it.next().getTitulo()+"\n");
+                            System.out.println("Reproduciendo siguiente canción -> " + it.next().getTitulo() + "\n");
                         } else {
                             System.out.println("Estás en el final de la playlist, ya no hay más canciones.");
-                            System.out.println("Ahora está sonando -> " + playlist.getLast().getTitulo()+"\n");
+                            System.out.println("Ahora está sonando -> " + playlist.getLast().getTitulo() + "\n");
                             haciaAdelante = false;
                             it.previous();
                         }
@@ -74,35 +74,45 @@ public class Main {
                     }
                     break;
                 case "2":
-                    try{
-                        if(haciaAdelante){
-                            if(it.hasPrevious()){
+                    try {
+                        if (haciaAdelante) {
+                            if (it.hasPrevious()) {
                                 it.previous();
                                 haciaAdelante = false;
                             }
                         }
-                        if(it.hasPrevious()){
-                            System.out.println("Reproduciendo la canción anterior -> " + it.previous().getTitulo()+"\n");
+                        if (it.hasPrevious()) {
+                            System.out.println("Reproduciendo la canción anterior -> " + it.previous().getTitulo() + "\n");
                         } else {
                             System.out.println("Estás en el principio de la playlist, ya no hay más canciones.");
-                            System.out.println("Ahora está sonando -> " + playlist.getFirst().getTitulo()+"\n");
+                            System.out.println("Ahora está sonando -> " + playlist.getFirst().getTitulo() + "\n");
                             haciaAdelante = false;
                         }
-                    } catch (NoSuchElementException e){
+                    } catch (NoSuchElementException e) {
                         System.out.println("La playlist está vacía. Todas las canciones han sido borradas." + "\n");
                     }
                     break;
                 case "3":
-                    if(haciaAdelante){
-                        try{
-                            it.previous();
-                            System.out.println("En estos momentos está sonando -> " + it.next().getTitulo()+"\n");
-                        }catch (NoSuchElementException e){
-                            System.out.println("La playlist está vacía. Todas las canciones han sido borradas."+"\n");
+                    try {
+                        if(haciaAdelante){
+                            if (it.hasNext()) {
+                                System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo() + "\n");
+                                it.next();
+                            }else{
+                                System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo() + "\n");
+                                it.next();
+                            }
+                        }else {
+                            if (it.hasPrevious()) {
+                                it.previous();
+                                System.out.println("En estos momentos está sonando -> " + it.next().getTitulo() + "\n");
+                            }else{
+                                it.next();
+                                System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo() + "\n");
+                            }
                         }
-                    } else {
-                        it.next();
-                        System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo()+"\n");
+                    } catch (NoSuchElementException e) {
+                        System.out.println("No hay ninguna canción sonando ahora mismo." + "\n");
                     }
                     break;
                 case "4":
@@ -112,35 +122,45 @@ public class Main {
                     imprimirMenu();
                     break;
                 case "6":
-                    try{
-                        if(haciaAdelante){
-                            it.previous();
-                            System.out.println("En estos momentos está sonando -> " + it.next().getTitulo());
-                            System.out.println("Eliminando....");
+                    try {
+                        if (haciaAdelante) {
+                            if(it.hasNext()) {
+                                it.previous();
+                                System.out.println("En estos momentos está sonando -> " + it.next().getTitulo());
+                                System.out.println("Eliminando....");
+                            }else{
+                                System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo());
+                                it.next();
+                                System.out.println("Eliminando....");
+                            }
                         } else {
-                            it.next();
-                            System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo());
-                            System.out.println("Eliminando....");
+                            if(it.hasPrevious()) {
+                                it.next();
+                                System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo());
+                                System.out.println("Eliminando....");
+                            }else{
+                                System.out.println("En estos momentos está sonando -> " + it.next().getTitulo());
+                                it.previous();
+                                System.out.println("Eliminando....");
+                            }
                         }
-                        try{
+                        try {
                             Thread.sleep(1000);
-                        }catch (InterruptedException e ){
+                        } catch (InterruptedException e) {
                             System.out.println("La espera se ha visto interrumpida.");
                         }
                         it.remove();
-                        if(it.hasNext()){
-                            try {
-                                it.previous();
-                            }catch (NoSuchElementException ignored){}
-                            System.out.println("En estos momentos está sonando -> " + it.next().getTitulo()+"\n");
-                        }else{
-                            try {
-                                it.next();
-                            }catch (NoSuchElementException ignored){}
-                            System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo()+"\n");
+                        if (it.hasNext()) {
+                            System.out.println("En estos momentos está sonando -> " + it.next().getTitulo() + "\n");
+                            //it.previous();
+                        } else if (it.hasPrevious()) {
+                            System.out.println("En estos momentos está sonando -> " + it.previous().getTitulo() + "\n");
+                            it.next();
+                        } else {
+                            System.out.println("No hay canciones en tu lista de reproducción.");
                         }
-                    }catch (NoSuchElementException e){
-                        System.out.println("No hay canciones en tu lista de reproducción.");
+                    } catch (NoSuchElementException e) {
+                        System.out.println("No hay ninguna canción reproduciendose.");
                     }
                     break;
             }
